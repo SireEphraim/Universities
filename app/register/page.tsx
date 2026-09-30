@@ -8,7 +8,7 @@ export default function Register() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: String(f.get("email")),
       password: String(f.get("password")),
       options: {
@@ -20,7 +20,10 @@ export default function Register() {
         },
       },
     });
-    setMsg(error ? error.message : "Check your email to confirm your account.");
+    if (error) return setMsg(error.message);
+    // With email confirmation off, signUp returns a session: go straight in.
+    if (data.session) window.location.href = "/materials";
+    else setMsg("Check your email to confirm your account.");
   }
 
   return (
