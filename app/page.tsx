@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Pricing from "@/components/Pricing";
 import AuthNav from "@/components/AuthNav";
+import Gate from "@/components/Gate";
 
 const courses = [
   "CSC101 – Introduction to Computing", "MTH102 – Calculus II", "GST103 – Use of English",
@@ -28,10 +29,17 @@ export default function LandingPage() {
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6">Search</button>
           </div>
         </form>
-        <p className="mt-3 text-sm text-gray-500">Free account required to browse.</p>
-        <Link href="/register" className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-          Create free account
-        </Link>
+        <Gate show="guest">
+          <p className="mt-3 text-sm text-gray-500">Free account required to browse.</p>
+          <Link href="/register" className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Create free account
+          </Link>
+        </Gate>
+        <Gate show="member">
+          <Link href="/materials" className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Browse materials
+          </Link>
+        </Gate>
       </section>
 
       {/* VALUE PROPOSITION */}
@@ -79,7 +87,8 @@ export default function LandingPage() {
 
       <Pricing />
 
-      {/* FINAL CTA */}
+      {/* FINAL CTA (visitors only) */}
+      <Gate show="guest">
       <section className="px-6 py-20 bg-blue-600 text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Start preparing better today</h2>
         <p className="mb-8 text-lg text-blue-100">Sign up free in under a minute.</p>
@@ -87,6 +96,7 @@ export default function LandingPage() {
           Create free account
         </Link>
       </section>
+      </Gate>
 
       <footer className="px-6 py-8 bg-gray-900 text-gray-400 text-center">
         <p>© {new Date().getFullYear()} StudyBank. All rights reserved.</p>

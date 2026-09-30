@@ -12,6 +12,7 @@ Past questions and course materials for Nigerian university students. Next.js + 
 2. supabase/payments.sql
 3. supabase/browse.sql
 4. supabase/moderator.sql
+5. supabase/profile_email.sql
 
 ## Paystack (Edge Functions)
 See supabase/functions/. Deploy both, set PAYSTACK_SECRET_KEY and SITE_URL as secrets.

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import GoogleButton from "@/components/GoogleButton";
 
 export default function Register() {
   const [msg, setMsg] = useState("");
@@ -38,6 +39,7 @@ export default function Register() {
         {[100, 200, 300, 400, 500].map((l) => <option key={l}>{l}</option>)}
       </select>
       <button className="w-full bg-blue-600 text-white rounded py-2">Register</button>
+      <GoogleButton />
       {msg && <p role="status" className="text-sm">{msg}</p>}
     </form>
   );

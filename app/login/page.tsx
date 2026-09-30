@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
+import GoogleButton from "@/components/GoogleButton";
 
 export default function Login() {
   const [msg, setMsg] = useState("");
@@ -26,6 +27,7 @@ export default function Login() {
       <input name="email" type="email" required placeholder="Email" className="w-full border rounded px-3 py-2" />
       <input name="password" type="password" required placeholder="Password" className="w-full border rounded px-3 py-2" />
       <button className="w-full bg-blue-600 text-white rounded py-2">Log in</button>
+      <GoogleButton />
       {msg && <p role="status" className="text-sm text-red-600">{msg}</p>}
       <p className="text-sm">No account? <Link href="/register" className="text-blue-600 underline">Register free</Link></p>
     </form>

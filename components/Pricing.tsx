@@ -9,9 +9,11 @@ export default function Pricing() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
+  const [authed, setAuthed] = useState(false);
 
   useEffect(() => {
     supabase.from("plans").select("*").order("duration_days").then(({ data }) => setPlans(data ?? []));
+    supabase.auth.getSession().then(({ data }) => setAuthed(!!data.session));
   }, []);
 
   async function subscribe(planId: string) {
@@ -20,7 +22,13 @@ export default function Pricing() {
     if (!session) return (window.location.href = "/register");
     setBusy(planId);
     const { data, error } = await supabase.functions.invoke("paystack-init", { body: { plan_id: planId } });
-    if (error || !data?.url) { setBusy(""); return setErr("Could not start payment. Try again."); }
+    if (error || !data?.url) {
+      setBusy("");
+      let detail: string | undefined = data?.error;
+      const ctx = (error as any)?.context;
+      if (!detail && ctx?.json) { const b = await ctx.json().catch(() => null); detail = b?.error ?? b?.message; }
+      return setErr(`Could not start payment${detail ? `: ${detail}` : ""}.`);
+    }
     window.location.href = data.url;
   }
 
@@ -36,7 +44,9 @@ export default function Pricing() {
             <li>Limited past questions and materials</li>
             <li>Upload documents to share</li>
           </ul>
-          <a href="/register" className="mt-6 text-center px-4 py-2 border rounded-lg hover:bg-gray-50">Create free account</a>
+          {authed
+            ? <p className="mt-6 text-center text-gray-500">Included with your account</p>
+            : <a href="/register" className="mt-6 text-center px-4 py-2 border rounded-lg hover:bg-gray-50">Create free account</a>}
         </div>
         {plans.map((p) => (
           <div key={p.id} className={`p-6 border rounded-xl flex flex-col ${p.id === "semester" ? "border-blue-600 border-2" : ""}`}>

@@ -4,7 +4,8 @@ import AuthNav from "@/components/AuthNav";
 import { supabase } from "@/lib/supabase";
 
 type Doc = { id: string; title: string; course_code: string; kind: string; session: string | null;
-             storage_path: string; file_size: number | null; is_premium: boolean };
+             storage_path: string; file_size: number | null; is_premium: boolean;
+             profiles: { email: string | null; full_name: string | null } | null };
 
 export default function Moderate() {
   const [state, setState] = useState<"loading" | "denied" | "ok">("loading");
@@ -12,7 +13,7 @@ export default function Moderate() {
   const [msg, setMsg] = useState("");
 
   async function load() {
-    const { data } = await supabase.from("documents").select("*")
+    const { data } = await supabase.from("documents").select("*, profiles(email, full_name)")
       .eq("status", "pending").order("created_at");
     setDocs(data ?? []);
   }
@@ -66,6 +67,7 @@ export default function Moderate() {
                   {d.session ? ` · ${d.session}` : ""}
                   {d.file_size ? ` · ${(d.file_size / 1048576).toFixed(1)} MB` : ""}
                 </p>
+                {d.profiles && <p className="text-sm text-gray-500">Uploaded by {d.profiles.full_name ?? "student"} ({d.profiles.email})</p>}
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <button onClick={() => preview(d.storage_path)} className="px-3 py-2 border rounded-lg hover:bg-gray-50">Preview file</button>

@@ -26,6 +26,8 @@ export default function Materials() {
     (async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { window.location.href = "/login?next=/materials"; return; }
+      const { data: me } = await supabase.from("profiles").select("university").eq("id", session.user.id).single();
+      if (me && !me.university) { window.location.href = "/profile"; return; }
       const initial = new URLSearchParams(window.location.search).get("q") ?? "";
       setQ(initial);
       search(initial, "");
