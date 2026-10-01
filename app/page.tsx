@@ -20,7 +20,7 @@ export default function LandingPage() {
           Access Past Questions & Course Materials - <span className="text-blue-600">Fast.</span>
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-          Past Exam Questions, Handouts and Course Materials for Nigerian University Students, organised by course.
+          Past Exam Questions, Handouts and Course Materials for Nigerian University Students.
         </p>
         <form action="/materials" method="get" className="mt-10 flex justify-center">
           <div className="flex w-full max-w-xl bg-white shadow-lg rounded-xl overflow-hidden">
