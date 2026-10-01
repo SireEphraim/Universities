@@ -17,10 +17,10 @@ export default function LandingPage() {
       {/* HERO */}
       <section className="px-6 py-20 max-w-6xl mx-auto text-center">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-          Access Past Questions & Course Materials — <span className="text-blue-600">Fast.</span>
+          Access Past Questions & Course Materials - <span className="text-blue-600">Fast.</span>
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-          Past exam questions, handouts and course materials for Nigerian university students, organised by course.
+          Past Exam Questions, Handouts and Course Materials for Nigerian University Students, organised by course.
         </p>
         <form action="/materials" method="get" className="mt-10 flex justify-center">
           <div className="flex w-full max-w-xl bg-white shadow-lg rounded-xl overflow-hidden">
@@ -37,7 +37,7 @@ export default function LandingPage() {
         </Gate>
         <Gate show="member">
           <Link href="/materials" className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            Browse materials
+            Browse Materials
           </Link>
         </Gate>
       </section>
@@ -90,7 +90,7 @@ export default function LandingPage() {
       {/* FINAL CTA (visitors only) */}
       <Gate show="guest">
       <section className="px-6 py-20 bg-blue-600 text-white text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Start preparing better today</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Preparing Better Today</h2>
         <p className="mb-8 text-lg text-blue-100">Sign up free in under a minute.</p>
         <Link href="/register" className="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition">
           Create free account
@@ -100,7 +100,7 @@ export default function LandingPage() {
 
       <footer className="px-6 py-8 bg-gray-900 text-gray-400 text-center">
         <p>© {new Date().getFullYear()} StudyBank. All rights reserved.</p>
-        <p className="mt-2">Made for Nigerian university students 💙</p>
+        <p className="mt-2">Made for Nigerian University Students 💙</p>
       </footer>
     </main>
   );
