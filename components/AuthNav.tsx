@@ -25,7 +25,7 @@ export default function AuthNav() {
 
   return (
     <nav className="px-6 py-4 max-w-6xl mx-auto flex items-center justify-between">
-      <Link href="/" className="font-bold text-xl">StudyBank</Link>
+      <Link href="/" className="font-bold text-xl">Nigerian University Students StudyBank</Link>
       <div className="flex items-center gap-4 text-sm">
         <Link href="/#pricing" className="hover:underline">Pricing</Link>
         {authed ? (
